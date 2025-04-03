@@ -1,17 +1,20 @@
 #!/bin/bash
-read -p "Enter the filename: " file
-lines=0
-words=0
-char=0
+
+read -p "Enter filename: " file
+
+line_count=0
+word_count=0
+char_count=0
 
 while IFS= read -r line; do
-    lines=$((lines + 1))
-    char=$((char + ${#line}))
-    for current_word in $line; do
-        words=$((words + 1))
+    line_count=$((line_count + 1))
+    char_count=$((char_count + ${#line} + 1))
+
+    for w in $line; do
+        word_count=$((word_count + 1))
     done
 done < "$file"
 
-echo "No of lines: $lines"
-echo "No of words: $words"
-echo "No of characters: $char"
+echo "Number of lines: $line_count"
+echo "Number of words: $word_count"
+echo "Number of characters: $char_count"
